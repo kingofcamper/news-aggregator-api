@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('source_id')->references('id')->on('sources')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('author')->nullable();
-            $table->string('title');
+            $table->text('title');
             $table->text('description');
             $table->text('url');
             $table->text('urlToImage')->nullable();

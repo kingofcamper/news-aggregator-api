@@ -28,17 +28,8 @@ Route::get('/articles', [ArticleController::class, 'index']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/sources', [SourceController::class, 'index']);
 
-// Route::group(['prefix' => 'news'], function () {
-//     Route::get('guardian', [NewsController::class, 'fetchGuardianNews']);
-//     Route::get('newyorktimes', [NewsController::class, 'fetchNewYorkTimesNews']);
-//     Route::get('another', [NewsController::class, 'fetchAnotherNewsSource']);
-// });
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/logout', [LogoutController::class, 'logout']);
-});
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
 });
