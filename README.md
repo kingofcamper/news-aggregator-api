@@ -34,7 +34,7 @@ You can now access the server at http://localhost:8000
 
 **TL;DR command list**
 
-    git clone git@github.com:kingofcamper/news-aggregator-api.git
+    git clone https://github.com/kingofcamper/news-aggregator-api.git
     cd news-aggregator-api
     composer install    
     php artisan key:generate    
