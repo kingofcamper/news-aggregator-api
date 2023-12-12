@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SourceController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +24,15 @@ use Illuminate\Support\Facades\Route;
 // Public Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/sources', [SourceController::class, 'index']);
+
+// Route::group(['prefix' => 'news'], function () {
+//     Route::get('guardian', [NewsController::class, 'fetchGuardianNews']);
+//     Route::get('newyorktimes', [NewsController::class, 'fetchNewYorkTimesNews']);
+//     Route::get('another', [NewsController::class, 'fetchAnotherNewsSource']);
+// });
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function(){

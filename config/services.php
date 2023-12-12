@@ -31,4 +31,22 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'news_api' => [
+        'key' => env('NEWSAPI_KEY'),
+        'secret' => env('NEWSAPI_SECRET'),
+        'url' => env('NEWSAPI_URL'),
+    ],
+
+    'the_guardian_api' => [
+        'key' => env('THEGUARDIAN_KEY'),
+        'secret' => env('THEGUARDIAN_SECRET'),
+        'url' => env('THEGUARDIAN_URL'),
+    ],
+
+    'new_york_times_api' => [
+        'key' => env('NYT_KEY'),
+        'secret' => env('NYT_SECRET'),
+        'url' => env('NYT_URL'),
+    ],
+
 ];

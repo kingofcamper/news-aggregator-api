@@ -15,7 +15,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Schedule commands with category arguments | requires server conf
+        $schedule->command('newsapi:daily-articles News')->daily();
+        $schedule->command('newyorktimes:daily-articles News')->twiceDaily();
+        $schedule->command('guardian:daily-articles News')->hourly();
     }
 
     /**
