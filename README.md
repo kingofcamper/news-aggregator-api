@@ -82,8 +82,9 @@ More information regarding the project can be found here https://github.com/goth
 
 ## Dependencies
 
-- [jwt-auth](https://github.com/tymondesigns/jwt-auth) - For authentication using JSON Web Tokens
+- [laravel-sanctum](https://github.com/laravel/sanctum) - For authentication using JSON Web Tokens
 - [laravel-cors](https://github.com/barryvdh/laravel-cors) - For handling Cross-Origin Resource Sharing (CORS)
+- [laravel-saloon](https://github.com/saloonphp/saloon) - For handling third party APIs integration
 
 ## Folders
 
