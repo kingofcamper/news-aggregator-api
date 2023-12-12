@@ -44,7 +44,7 @@ You can now access the server at http://localhost:8000
     php artisan migrate
     php artisan serve
 
-**Generate Articles**
+**Generate Articles** (By default the third parties APIs keys are included in **.env**)
 
     php artisan newsapi:daily-articles <category>
     php artisan newyorktimes:daily-articles <category>
