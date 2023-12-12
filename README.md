@@ -8,7 +8,7 @@ Alternative installation is possible without local dependencies relying on [Dock
 
 Clone the repository
 
-    git clone git@github.com:kingofcamper/news-aggregator-api.git
+    git clone https://github.com/kingofcamper/news-aggregator-api.git
 
 Switch to the repo folder
 
