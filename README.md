@@ -1,66 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Getting started
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Installation
 
-## About Laravel
+Please check the official laravel installation guide for server requirements before you start. [Official Documentation](https://laravel.com/docs/5.4/installation#installation)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Alternative installation is possible without local dependencies relying on [Docker](#docker). 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Clone the repository
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    git clone git@github.com:kingofcamper/news-aggregator-api.git
 
-## Learning Laravel
+Switch to the repo folder
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    cd news-aggregator-api
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Install all the dependencies using composer
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    composer install
 
-## Laravel Sponsors
+Copy the example env file and make the required configuration changes in the .env file
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    cp .env.example .env
 
-### Premium Partners
+Generate a new application key
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+    php artisan key:generate
 
-## Contributing
+Run the database migrations (**Set the database connection in .env before migrating**)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    php artisan migrate
 
-## Code of Conduct
+Start the local development server
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    php artisan serve
 
-## Security Vulnerabilities
+You can now access the server at http://localhost:8000
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**TL;DR command list**
 
-## License
+    git clone git@github.com:kingofcamper/news-aggregator-api.git
+    cd news-aggregator-api
+    composer install
+    cp .env.example .env
+    php artisan key:generate    
+    
+**Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    php artisan migrate
+    php artisan serve
+
+## Docker
+
+To install with [Docker](https://www.docker.com), run following commands:
+
+```
+git clone git@github.com:kingofcamper/news-aggregator-api.git
+cd news-aggregator-api
+cp .env.example.docker .env
+docker-compose exec app rm -rf vendor composer.lock
+docker run -v $(pwd):/app composer install
+cd ./docker
+docker-compose up -d
+docker-compose exec php php artisan key:generate
+docker-compose exec php php artisan migrate
+docker-compose exec php php artisan serve --host=0.0.0.0
+```
+
+The api can be accessed at [http://localhost:8000/api](http://localhost:8000/api).
+
+## API Specification
+
+This application adheres to the api specifications set by the [Thinkster](https://github.com/gothinkster) team. This helps mix and match any backend with any other frontend without conflicts.
+
+> [Full API Spec](https://github.com/gothinkster/realworld/tree/master/api)
+
+More information regarding the project can be found here https://github.com/gothinkster/realworld
+
+----------
+
+# Code overview
+
+## Dependencies
+
+- [jwt-auth](https://github.com/tymondesigns/jwt-auth) - For authentication using JSON Web Tokens
+- [laravel-cors](https://github.com/barryvdh/laravel-cors) - For handling Cross-Origin Resource Sharing (CORS)
+
+## Folders
+
+- `app/Integrations/NewsApi` - Contains the files integrating News api content
+- `app/Integrations/NewYorkTimes` - Contains the files integrating New York Times content
+- `app/Integrations/TheGuardian` - Contains the files integrating The Guardian content
+- `config` - Contains all the application configuration files
+- `database/migrations` - Contains all the database migrations
+- `routes` - Contains all the api routes defined in api.php file
+
+## Environment variables
+
+The `.env` file is where you can set the configuration and environment variables for the application. Here are some essential variables you might need to configure:
+
+- `APP_ENV`: The application environment (e.g., `local`, `production`).
+- `APP_KEY`: The application key used for encryption and security.
+- `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`: Database configuration for your chosen database.
+- `CORS_ALLOWED_ORIGINS`: Origins allowed for Cross-Origin Resource Sharing (CORS).
+- `NEWSAPI_KEY`: The news api key used for fetching articles from news api.
+- `NEWSAPI_URL`: The base url of news api.
+- `THEGUARDIAN_KEY`: The news api key used for fetching articles from the guardian.
+- `THEGUARDIAN_URL`: The base url of the guardian.
+- `NYT_KEY`: The news api key used for fetching articles from new york times.
+- `NYT_URL`: The base url of new york times.
+
+***Note***: Before running migrations or starting the server, ensure the database connection and other necessary variables are correctly set in the `.env` file.
+
+----------
+
+# Testing API
+
+Run the laravel development server
+
+    php artisan serve
+
+The api can now be accessed at
+
+    http://localhost:8000/api
+
+----------
+
+# Cross-Origin Resource Sharing (CORS)
+ 
+This applications has CORS enabled by default on all API endpoints. The default configuration allows requests from `http://localhost:3000` and `http://localhost:4200` to help speed up your frontend testing. The CORS allowed origins can be changed by setting them in the config file. Please check the following sources to learn more about CORS.
+ 
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+- https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+- https://www.w3.org/TR/cors
