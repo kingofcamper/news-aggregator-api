@@ -18,10 +18,6 @@ Install all the dependencies using composer
 
     composer install
 
-Copy the example env file and make the required configuration changes in the .env file
-
-    cp .env.example .env
-
 Generate a new application key
 
     php artisan key:generate
@@ -47,6 +43,12 @@ You can now access the server at http://localhost:8000
 
     php artisan migrate
     php artisan serve
+
+**Generate Articles**
+
+    php artisan newsapi:daily-articles <category>
+    php artisan newyorktimes:daily-articles <category>
+    php artisan guardian:daily-articles <category>
 
 ## Docker
 
