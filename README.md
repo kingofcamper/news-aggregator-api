@@ -40,8 +40,7 @@ You can now access the server at http://localhost:8000
 
     git clone git@github.com:kingofcamper/news-aggregator-api.git
     cd news-aggregator-api
-    composer install
-    cp .env.example .env
+    composer install    
     php artisan key:generate    
     
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
@@ -56,7 +55,6 @@ To install with [Docker](https://www.docker.com), run following commands:
 ```
 git clone git@github.com:kingofcamper/news-aggregator-api.git
 cd news-aggregator-api
-cp .env.example.docker .env
 docker-compose exec app rm -rf vendor composer.lock
 docker run -v $(pwd):/app composer install
 cd ./docker
